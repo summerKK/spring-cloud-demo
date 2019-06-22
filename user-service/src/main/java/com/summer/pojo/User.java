@@ -5,11 +5,12 @@ import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "user")
 @Data
-public class User {
+public class User implements Serializable {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
