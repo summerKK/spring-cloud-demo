@@ -1,5 +1,5 @@
 server:
-  port: 8101
+  port: 8105
 spring:
   datasource:
     url: jdbc:mysql:///summer
@@ -13,7 +13,7 @@ mybatis:
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:8103/eureka
+      defaultZone: http://127.0.0.1:8103/eureka,http://127.0.0.1:8104/eureka
     instance:
       prefer-ip-address: true # 当调用getHostname获取实例的hostname时，返回ip而不是host名称
       ip-address: 127.0.0.1 # 指定自己的ip信息，不指定的话会自己寻找
