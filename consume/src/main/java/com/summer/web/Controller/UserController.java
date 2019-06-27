@@ -1,5 +1,6 @@
 package com.summer.web.Controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.summer.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Random;
 
 @RestController
 @RequestMapping("consume")
@@ -38,8 +40,17 @@ public class UserController {
      * @return
      */
     @GetMapping("/loadbance/{id}")
-    public User getUser1(@PathVariable("id") Long id) {
+    @HystrixCommand(fallbackMethod = "getUser1Fallback")
+    public User getUser1(@PathVariable("id") Integer id) throws Exception {
+        Thread.sleep(new Random().nextInt(2000));
         String baseUrl = "http://user-service/user/" + id;
         return restTemplate.getForObject(baseUrl, User.class);
+    }
+
+    public User getUser1Fallback(Integer id) {
+        User user = new User();
+        user.setId(id);
+        user.setUsername("用户信息查询出现异常！");
+        return user;
     }
 }

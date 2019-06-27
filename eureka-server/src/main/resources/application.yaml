@@ -1,5 +1,5 @@
 server:
-  port: 8104
+  port: 8103
 spring:
   application:
     name: eureka-server
@@ -7,7 +7,7 @@ eureka:
   client:
     fetch-registry: false
     service-url:
-      defaultZone: http://127.0.0.1:8103/eureka
+      defaultZone: http://127.0.0.1:8104/eureka
   instance:
     lease-expiration-duration-in-seconds: 10 # 10秒即过期
     lease-renewal-interval-in-seconds: 5 # 5秒一次心跳
